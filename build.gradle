@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id "com.jfrog.artifactory" version "4.9.8"
+    id "io.freefair.lombok" version "5.2.1"
+}
+apply plugin: "com.jfrog.artifactory"
+apply plugin: "io.freefair.lombok"
+
+group 'dev.dtrix'
+version '0.1-alpha'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+artifactoryPublish.dependsOn build
+
+/*artifactory {
+    contextUrl = "${artifactory_contextUrl}"
+    publish {
+        repository {
+            repoKey = 'diabolicatrix'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+        defaults {
+            publications('mavenJava')
+        }
+    }
+}*/
